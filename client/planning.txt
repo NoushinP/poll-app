@@ -1,5 +1,6 @@
 FINAL PROJECT
  
+ (Backend: Week 21 Exercise 5. Backend+Frontent Week 21 Exercise 19)
 
 Backend + Frontend => /mern-app
 1. create our package.json 
@@ -34,14 +35,15 @@ Backend
 6.Create models
     add Question model
         name
-        total 
+        total vote count
+        Array of choices
 
     add Choice model (nested inside question model)
         name
-        responses (clicked/chosen)
+        vote count (clicked/chosen)
         
 7. Create schema: typeDefs & resolvers
-    query: items
+    query: Questions filter out questions the use has already answered
 8. Add seed data
     create cleanDB.js file to empty the database
     create items.json file
@@ -49,40 +51,6 @@ Backend
     add to scripts section of package.json, seed script
 9. Test items endpoint in apollo sandbox
 -----
-
-
-
-
-
-
-
-
-
- (Backend: Week 21 Exercise 5. Backend+Frontent Week 21 Exercise 19)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Frontend => /client
 1. create client folder using vite create command inside the mern-app folder
