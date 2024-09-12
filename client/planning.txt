@@ -28,7 +28,7 @@ Backend
         add scripts to run app in dev mode
 4. Create server.js
 5. Create database
-    add connectin.js file in config/
+    add connection.js file in config/
 5b. push to GitHub
     in terminal: git init
     in browser: create new repo without a readme, follow GitHub instructionsd
