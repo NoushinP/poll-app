@@ -56,7 +56,7 @@ Frontend => /client
 1. create client folder using vite create command inside the mern-app folder
 2. Install dependencies - @apollo/client
 3. Set up what is needed to consume the backend
-    a. add proxy to vite.config.json
+    a. add proxy to vite.config.js
     b. Wrap main component in ApolloProvider
     c. Create utils folder and add queries.js
     d. Create landing page, consume the backend data (ex. 11, Home)
