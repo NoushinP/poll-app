@@ -14,6 +14,7 @@ const typeDefs = `
 
   type Query {
     questions: [Question]
+    choices: [Choice]
   }
 `;
 
