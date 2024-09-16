@@ -1,7 +1,23 @@
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import "./Welcome.css"
+import { QUERY_QUESTION } from '../utils/queries'
+// import Poll from './Poll'
+
 const Welcome = ()=> {
+
+    const { loading, data } = useQuery(QUERY_QUESTION);
+      
+        const questions= data?.questions|| [];
+        console.log(loading, data)
+
+        const questionList = questions.map(question => {
+            return (
+                <Poll key={question._id} question={question} />
+            )
+        })
+
+
     return(
         <div className="question"> 
             <h1>Website</h1>
