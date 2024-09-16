@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.question {
+  background-color: purple;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
