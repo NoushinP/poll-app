@@ -1,22 +1,16 @@
-function QuestionDisplay({poll}) {
+import "./QuestionDisplay.css"
+const QuestionDisplay = ({ question, onChoiceClick}) => {
 
-
-// const QuestionDisplay = (props){ 
-    console.log("Question:", poll)
-    const choiceButtons = poll.choices.map(choice => {
-       return <button>{choice.name}</button>
+    const questionName = question.name
+    const choiceButtons = question.choices.map((choice, index) => {
+        return <button key={index} onClick={onChoiceClick}>{choice.name}</button>
     })
     console.log(choiceButtons)
     return (
         <div>
-            hi
-            {/* {poll.name} */}
-            {choiceButtons} 
-            
+            <h2 className="questionName">{questionName}</h2>
+            {choiceButtons}
         </div>
-       
-        
-        
     )
 }
 
