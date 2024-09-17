@@ -9,6 +9,7 @@ db.once('open', async () => {
     const bevChoice1 = await Choice.create({ name: 'Coke', responses: 0 })
     const bevChoice2 = await Choice.create({ name: 'Pepsi', responses: 0 })
     const bevChoice3 = await Choice.create({ name: 'Sprite', responses: 0 })
+
     const bevChoice4 = await Choice.create({ name: 'Dr. Pepper', responses: 0 })
     bevQuestion.choices.push(bevChoice1._id, bevChoice2._id, bevChoice3._id, bevChoice4._id)
     await bevQuestion.save()

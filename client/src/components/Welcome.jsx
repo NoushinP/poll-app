@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { QUERY_QUESTION } from '../utils/queries'
 import QuestionDisplay from './QuestionDisplay'
 
-
 const Welcome = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const { loading, data } = useQuery(QUERY_QUESTION);
@@ -15,7 +14,7 @@ const Welcome = () => {
 
     const questions = data?.questions || [];
 
-    const handleChoiceClick = () => {
+    const handleNextClick = () => {
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
@@ -25,7 +24,12 @@ const Welcome = () => {
         <div className="question">
             <h1>Website</h1>
             <h2>😱Discover what people really think!😱</h2>
-            <QuestionDisplay question={questions[currentQuestionIndex]} onChoiceClick={handleChoiceClick} />
+            <QuestionDisplay 
+                question={questions[currentQuestionIndex]} 
+            />
+            {currentQuestionIndex < questions.length - 1 && (
+                <button onClick={handleNextClick}>Next</button>
+            )}
         </div>
     )
 }
