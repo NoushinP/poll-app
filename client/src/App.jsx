@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import Welcome from './components/welcome';
+import Welcome from './components/Welcome';
 //import poll from './components/poll.jsx'
 const client = new ApolloClient({
   uri: '/graphql',

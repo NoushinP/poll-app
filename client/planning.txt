@@ -61,8 +61,7 @@ Frontend => /client
     c. Create utils folder and add queries.js
     d. Create landing page, consume the backend data (ex. 11, Home)
 4. Use ant design components for each item ()
-----
-5. Add a mutations file 
-- addItem
-- removeItem
-- updateItem
+
+
+5. crate variables (last question index, pick a number 0-last index @random/ advancing arrows in react)
+
