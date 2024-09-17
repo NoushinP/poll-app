@@ -11,6 +11,7 @@ db.once('open', async () => {
     const bevChoice3 = await Choice.create({ name: 'Sprite', responses: 0 })
     const bevChoice4 = await Choice.create({ name: 'Other', responses: 0 })
     beverageQuestion.choices.push(bevChoice1._id, bevChoice2._id, bevChoice3._id, bevChoice4._id)
+
     await beverageQuestion.save()
     const sportsQuestion = await Question.create({ name: "Favorite sports", choices: [] })
     const sportsChoice1 = await Choice.create({ name: 'Baseball', responses: 0 })
@@ -19,6 +20,7 @@ db.once('open', async () => {
     const sportsChoice4 = await Choice.create({ name: 'Hockey', responses: 0 })
     sportsQuestion.choices.push(sportsChoice1._id, sportsChoice2._id, sportsChoice3._id, sportsChoice4._id)
     await sportsQuestion.save()
+    
     const movieQuestion = await Question.create({ name: "Favorite Movie", choices: [] })
     const movieChoice1 = await Choice.create({ name: 'Mighty Ducks', responses: 0 })
     const movieChoice2 = await Choice.create({ name: 'Natural', responses: 0 })

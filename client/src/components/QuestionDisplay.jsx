@@ -1,11 +1,33 @@
 import "./QuestionDisplay.css"
-const QuestionDisplay = ({ question, onChoiceClick}) => {
+import { useState, useEffect } from 'react';
+
+const QuestionDisplay = ({ question }) => {
+    const [clickedChoices, setClickedChoices] = useState({})
 
     const questionName = question.name
     const choiceButtons = question.choices.map((choice, index) => {
-        return <button key={index} onClick={onChoiceClick}>{choice.name}</button>
+        const isClicked = clickedChoices[choice.id] || false
+
+        const handleChoiceClick = () => {
+            setClickedChoices((prevClickedChoices) => ({ ...prevClickedChoices, [choice.id]: true }))
+        }
+
+        return (
+            <div key={index}>
+                <button onClick={handleChoiceClick}>
+                    {choice.name}
+                </button>
+                {isClicked && (
+                    <p className="choice-response">{choice.responses}</p>
+                )}
+            </div>
+        )
     })
-    console.log(choiceButtons)
+
+    useEffect(() => {
+        setClickedChoices({})
+    }, [question])
+
     return (
         <div>
             <h2 className="questionName">{questionName}</h2>
