@@ -1,4 +1,4 @@
-.question {justify-content: center; align-items: center;}
+.question {display:flex; align-items: center;}
 .choices {background-color: rgb(204, 11, 226); display:flex; justify-content: space-evenly}
 .button {background-color: rgb(16, 62, 161); border-color: aqua;}
 body {background-color:rgb(16, 62, 161)}

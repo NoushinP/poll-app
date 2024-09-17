@@ -8,9 +8,6 @@ const questionSchema = new Schema(
       unique: true,
       trim: true
     },
-    // totalvotes: {
-    //   type: Number
-    // },
 
   choices: [
     {
