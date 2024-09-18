@@ -1,45 +1,58 @@
-import "./QuestionDisplay.css";
-import { useState, useEffect } from 'react';
 
-const QuestionDisplay = ({ question, onChoiceClick }) => {
-    const [clickedChoices, setClickedChoices] = useState({});
+import "./QuestionDisplay.css"
+import { useState, useEffect, useCallback } from 'react';
+
+const QuestionDisplay = ({ question, onResetShowResponses }) => {
+    const [showResponses, setShowResponses] = useState(false)
+    const [choices, setChoices] = useState(question.choices)
+
+    const questionName = question.name
+
+    const handleChoiceClick = useCallback((choiceId) => {
+        const updatedChoices = choices.map((choice) => {
+            if (choice._id === choiceId) {
+                const updatedResponse = (choice.responses || 0) + 1
+                localStorage.setItem(`choice-${choiceId}`, updatedResponse)
+                return { ...choice, responses: updatedResponse }
+            }
+            return choice
+        })
+        setChoices(updatedChoices)
+        setShowResponses(true)
+    }, [choices])
 
     useEffect(() => {
-        setClickedChoices({});
-    }, [question]);
+        const loadedChoices = question.choices.map((choice) => {
+            const storedResponse = localStorage.getItem(`choice-${choice._id}`)
+            return storedResponse ? { ...choice, responses: parseInt(storedResponse) } : choice
+        })
+        setChoices(loadedChoices)
+    }, [question])
 
-    const handleChoiceClick = (choiceId, choiceName) => {
-        setClickedChoices((prevClickedChoices) => ({
-            ...prevClickedChoices,
-            [choiceId]: true
-        }));
 
-        if (onChoiceClick) {
-            onChoiceClick(choiceName);
+    const resetShowResponses = useCallback(() => {
+        setShowResponses(false);
+      }, [])
+
+    useEffect(() => {
+        if (onResetShowResponses) {
+            onResetShowResponses(resetShowResponses);
         }
-    };
-
-    const questionName = question.name;
-
-    const choiceButtons = question.choices.map((choice, index) => {
-        const isClicked = clickedChoices[choice.id] || false;
-
-        return (
-            <div key={index}>
-                <button onClick={() => handleChoiceClick(choice.id, choice.name)}>
-                    {choice.name}
-                </button>
-                {isClicked && (
-                    <p className="choice-response">{choice.responses}</p>
-                )}
-            </div>
-        );
-    });
+    }, [onResetShowResponses, resetShowResponses]);
 
     return (
         <div>
             <h2 className="questionName">{questionName}</h2>
-            {choiceButtons}
+            {choices.map((choice) => (
+                <div key={choice._id}>
+                    <button onClick={() => handleChoiceClick(choice._id)}>
+                        {choice.name}
+                    </button>
+                    {showResponses && (
+                        <p className="choice-response">Responses: {choice.responses}</p>
+                    )}
+                </div>
+            ))}
         </div>
     );
 };
