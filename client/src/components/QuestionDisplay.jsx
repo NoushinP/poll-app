@@ -1,3 +1,4 @@
+
 import "./QuestionDisplay.css"
 import { useState, useEffect, useCallback } from 'react';
 
@@ -28,6 +29,7 @@ const QuestionDisplay = ({ question, onResetShowResponses }) => {
         setChoices(loadedChoices)
     }, [question])
 
+
     const resetShowResponses = useCallback(() => {
         setShowResponses(false);
       }, [])
@@ -52,7 +54,7 @@ const QuestionDisplay = ({ question, onResetShowResponses }) => {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default QuestionDisplay
+export default QuestionDisplay;
