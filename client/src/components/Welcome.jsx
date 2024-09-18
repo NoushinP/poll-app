@@ -16,16 +16,21 @@ const Welcome = () => {
 
     const handleNextClick = () => {
         if (currentQuestionIndex < questions.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
+            setCurrentQuestionIndex(currentQuestionIndex + 1)
         }
+    }
+
+    const resetShowResponses = (reset) => {
+        reset();
     }
 
     return (
         <div className="question">
             <h1>Website</h1>
-            <h2>😱Discover what people really think!😱</h2>
+            <h2>Discover what people really think!</h2>
             <QuestionDisplay 
                 question={questions[currentQuestionIndex]} 
+                onResetShowResponses={resetShowResponses}
             />
             {currentQuestionIndex < questions.length - 1 && (
                 <button onClick={handleNextClick}>Next</button>

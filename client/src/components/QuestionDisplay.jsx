@@ -1,8 +1,8 @@
 import "./QuestionDisplay.css"
 import { useState, useEffect, useCallback } from 'react';
 
-const QuestionDisplay = ({ question }) => {
-    const [clickedChoices, setClickedChoices] = useState({})
+const QuestionDisplay = ({ question, onResetShowResponses }) => {
+    const [showResponses, setShowResponses] = useState(false)
     const [choices, setChoices] = useState(question.choices)
 
     const questionName = question.name
@@ -17,7 +17,7 @@ const QuestionDisplay = ({ question }) => {
             return choice
         })
         setChoices(updatedChoices)
-        setClickedChoices((prevClickedChoices) => ({ ...prevClickedChoices, [choiceId]: true }))
+        setShowResponses(true)
     }, [choices])
 
     useEffect(() => {
@@ -28,9 +28,15 @@ const QuestionDisplay = ({ question }) => {
         setChoices(loadedChoices)
     }, [question])
 
+    const resetShowResponses = useCallback(() => {
+        setShowResponses(false);
+      }, [])
+
     useEffect(() => {
-        setClickedChoices({})
-    }, [question])
+        if (onResetShowResponses) {
+            onResetShowResponses(resetShowResponses);
+        }
+    }, [onResetShowResponses, resetShowResponses]);
 
     return (
         <div>
@@ -40,7 +46,7 @@ const QuestionDisplay = ({ question }) => {
                     <button onClick={() => handleChoiceClick(choice._id)}>
                         {choice.name}
                     </button>
-                    {clickedChoices[choice._id] && (
+                    {showResponses && (
                         <p className="choice-response">Responses: {choice.responses}</p>
                     )}
                 </div>
