@@ -1,42 +1,63 @@
-import "./QuestionDisplay.css"
-import { useState, useEffect } from 'react';
 
-const QuestionDisplay = ({ question }) => {
-    const [clickedChoices, setClickedChoices] = useState({})
+import "./QuestionDisplay.css"
+import { useState, useEffect, useCallback } from 'react';
+
+const QuestionDisplay = ({ question, onResetShowResponses }) => {
+    const [showResponses, setShowResponses] = useState(false)
+    const [choices, setChoices] = useState(question.choices)
 
     const questionName = question.name
-    const choiceButtons = question.choices.map((choice, index) => {
-        const isClicked = clickedChoices[choice.id] || false
 
-        const handleChoiceClick = () => {
-            setClickedChoices((prevClickedChoices) => ({ ...prevClickedChoices, [choice.id]: true }))
-        }
-
-        return (
-            <div className="choice-cointainer" key={index}>
-                <button className="choice-button" onClick={handleChoiceClick}>
-                    {choice.name}
-                </button>
-                {isClicked && (
-                    <p className="choice-response">{choice.responses}</p>
-                )}
-            </div>
-        )
-    })
+    const handleChoiceClick = useCallback((choiceId) => {
+        const updatedChoices = choices.map((choice) => {
+            if (choice._id === choiceId) {
+                const updatedResponse = (choice.responses || 0) + 1
+                localStorage.setItem(`choice-${choiceId}`, updatedResponse)
+                return { ...choice, responses: updatedResponse }
+            }
+            return choice
+        })
+        setChoices(updatedChoices)
+        setShowResponses(true)
+    }, [choices])
 
     useEffect(() => {
-        setClickedChoices({})
+        const loadedChoices = question.choices.map((choice) => {
+            const storedResponse = localStorage.getItem(`choice-${choice._id}`)
+            return storedResponse ? { ...choice, responses: parseInt(storedResponse) } : choice
+        })
+        setChoices(loadedChoices)
     }, [question])
+
+
+    const resetShowResponses = useCallback(() => {
+        setShowResponses(false);
+      }, [])
+
+    useEffect(() => {
+        if (onResetShowResponses) {
+            onResetShowResponses(resetShowResponses);
+        }
+    }, [onResetShowResponses, resetShowResponses]);
 
     return (
         
         <div>
             <div className="questionContainer">
             <h2 className="questionName">{questionName}</h2>
-            </div>
-            {choiceButtons}
-        </div>
-    )
-}
 
-export default QuestionDisplay
+            {choices.map((choice) => (
+                <div  className="choice-cointainer" key={choice._id}>
+                    <button className="choice-button" onClick={() => handleChoiceClick(choice._id)}>
+                        {choice.name}
+                    </button>
+                    {showResponses && (
+                        <p className="choice-response">Responses: {choice.responses}</p>
+                    )}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default QuestionDisplay;
