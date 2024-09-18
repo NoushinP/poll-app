@@ -41,11 +41,14 @@ const QuestionDisplay = ({ question, onResetShowResponses }) => {
     }, [onResetShowResponses, resetShowResponses]);
 
     return (
+        
         <div>
+            <div className="questionContainer">
             <h2 className="questionName">{questionName}</h2>
+
             {choices.map((choice) => (
-                <div key={choice._id}>
-                    <button onClick={() => handleChoiceClick(choice._id)}>
+                <div  className="choice-cointainer" key={choice._id}>
+                    <button className="choice-button" onClick={() => handleChoiceClick(choice._id)}>
                         {choice.name}
                     </button>
                     {showResponses && (
