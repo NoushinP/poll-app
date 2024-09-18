@@ -13,8 +13,8 @@ const QuestionDisplay = ({ question }) => {
         }
 
         return (
-            <div key={index}>
-                <button onClick={handleChoiceClick}>
+            <div className="choice-cointainer" key={index}>
+                <button className="choice-button" onClick={handleChoiceClick}>
                     {choice.name}
                 </button>
                 {isClicked && (
@@ -29,8 +29,11 @@ const QuestionDisplay = ({ question }) => {
     }, [question])
 
     return (
+        
         <div>
+            <div className="questionContainer">
             <h2 className="questionName">{questionName}</h2>
+            </div>
             {choiceButtons}
         </div>
     )
