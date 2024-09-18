@@ -32,7 +32,7 @@ const QuestionDisplay = ({ question, onResetShowResponses }) => {
 
     const resetShowResponses = useCallback(() => {
         setShowResponses(false);
-      }, [])
+    }, [])
 
     useEffect(() => {
         if (onResetShowResponses) {
@@ -41,23 +41,24 @@ const QuestionDisplay = ({ question, onResetShowResponses }) => {
     }, [onResetShowResponses, resetShowResponses]);
 
     return (
-        
-        <div>
-            <div className="questionContainer">
-            <h2 className="questionName">{questionName}</h2>
 
-            {choices.map((choice) => (
-                <div  className="choice-cointainer" key={choice._id}>
-                    <button className="choice-button" onClick={() => handleChoiceClick(choice._id)}>
-                        {choice.name}
-                    </button>
-                    {showResponses && (
-                        <p className="choice-response">Responses: {choice.responses}</p>
-                    )}
+        
+            <div >
+                <div className="questionContainer">
+                <h2 className="questionName">{questionName}</h2>
                 </div>
-            ))}
-        </div>
-    );
+                {choices.map((choice) => (
+                    <div className="choice-cointainer" key={choice._id}>
+                        <button className="choice-button" onClick={() => handleChoiceClick(choice._id)}>
+                            {choice.name}
+                        </button>
+                        {showResponses && (
+                            <p className="choice-response">Responses: {choice.responses}</p>
+                        )}
+                    </div>
+                ))}
+            </div>
+            );
 };
 
-export default QuestionDisplay;
+            export default QuestionDisplay;
