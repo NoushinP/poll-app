@@ -1,2 +1,0 @@
-When button is clicked, increment responses by 1 and display that on the page
-display responses in a button
