@@ -68,7 +68,7 @@ const Welcome = () => {
 
     return (
         <div className="container">
-            <h1>Welcome to Meep</h1>
+            <h1>Welcome to Meeptopia</h1>
             <h2>😱Discover what people really think!😱</h2>
 
             <QuestionDisplay 
