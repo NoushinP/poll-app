@@ -122,7 +122,7 @@ db.once('open', async () => {
     const colorChoice1 = await Choice.create({ name: 'Red', responses: 0 })
     const colorChoice2 = await Choice.create({ name: 'Blue', responses: 0 })
     const colorChoice3 = await Choice.create({ name: 'Green', responses: 0 })
-    const colorChoice4 = await Choice.create({ name: 'Purple', responses: 0 })
+    const colorChoice4 = await Choice.create({ name: 'Black', responses: 0 })
     colorQuestion.choices.push(colorChoice1._id, colorChoice2._id, colorChoice3._id, colorChoice4._id)
     await colorQuestion.save()
 
@@ -311,7 +311,7 @@ db.once('open', async () => {
     await breakfastQuestion.save()
 
     const detectiveQuestion = await Question.create({ name: "Best Fictional Detective?", choices: [] })
-    const detectiveChoice1 = await Choice.create({ name: 'Batman', responses: 0 })
+    const detectiveChoice1 = await Choice.create({ name: 'The Batman', responses: 0 })
     const detectiveChoice2 = await Choice.create({ name: 'Sherlock Holmes', responses: 0 })
     const detectiveChoice3 = await Choice.create({ name: 'Nancy Drew', responses: 0 })
     const detectiveChoice4 = await Choice.create({ name: 'Colombo', responses: 0 })
