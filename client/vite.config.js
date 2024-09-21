@@ -10,12 +10,7 @@ export default defineConfig({
     port: 3000,
     open: true,
     proxy: {
-      '/graphql': {
-        target: ASSET_URL,
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/proxy/, '')
-      }, 
+      '/graphql': ASSET_URL 
     } 
 
   }
