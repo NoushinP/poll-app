@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/graphql",
+            "destination": "https://poll-app-backend-ivory.vercel.app/graphql"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
+    ]
+}
