@@ -1,4 +1,4 @@
-const { Choice, Question } = require('../models');
+const { Choice, Question } = require('../models/index.js');
 
 const resolvers = {
   Query: {
