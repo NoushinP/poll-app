@@ -7,7 +7,7 @@ const { expressMiddleware } = require('@apollo/server/express4');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers

@@ -1,5 +1,5 @@
 
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { UPDATE_RESPONSES } from '../utils/mutations';
 
@@ -11,6 +11,11 @@ const QuestionDisplay = ({ question }) => {
         await updateResponses({ variables: { id: choiceId } })
         setShowResponses(true)
     }
+
+    useEffect(() => {
+        setShowResponses(false)
+
+    }, [question])    
 
     return (
         <div >
