@@ -1,6 +1,6 @@
 {  
   "rewrites": [
-       { "source": "/graphql/:match*",
+       { "source": "/proxy/:match*",
          "destination": "https://poll-app-backend-ivory.vercel.app/:match*"
        } 
  ]
