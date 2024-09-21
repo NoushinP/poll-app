@@ -14,6 +14,7 @@ export default defineConfig({
         target: ASSET_URL,
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/graphql/, '')
       }, 
     } 
 
