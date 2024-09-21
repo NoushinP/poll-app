@@ -6,6 +6,7 @@ export default defineConfig({
   // base: `${ASSET_URL}/dist/`,
   plugins: [react()],
   server: {
+    base: '/dist',
     port: 3000,
     open: true,
     proxy: {
