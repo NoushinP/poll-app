@@ -1,64 +1,34 @@
 
-import "./QuestionDisplay.css"
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
+import { useMutation } from '@apollo/client';
+import { UPDATE_RESPONSES } from '../utils/mutations';
 
-const QuestionDisplay = ({ question, onResetShowResponses }) => {
+const QuestionDisplay = ({ question }) => {
     const [showResponses, setShowResponses] = useState(false)
-    const [choices, setChoices] = useState(question.choices)
+    const [updateResponses, { data, loading, error }] = useMutation(UPDATE_RESPONSES)
 
-    const questionName = question.name
-
-    const handleChoiceClick = useCallback((choiceId) => {
-        const updatedChoices = choices.map((choice) => {
-            if (choice._id === choiceId) {
-                const updatedResponse = (choice.responses || 0) + 1
-                localStorage.setItem(`choice-${choiceId}`, updatedResponse)
-                return { ...choice, responses: updatedResponse }
-            }
-            return choice
-        })
-        setChoices(updatedChoices)
+    const handleChoiceClick = async (choiceId) => {
+        await updateResponses({ variables: { id: choiceId } })
         setShowResponses(true)
-    }, [choices])
-
-    useEffect(() => {
-        const loadedChoices = question.choices.map((choice) => {
-            const storedResponse = localStorage.getItem(`choice-${choice._id}`)
-            return storedResponse ? { ...choice, responses: parseInt(storedResponse) } : choice
-        })
-        setChoices(loadedChoices)
-    }, [question])
-
-
-    const resetShowResponses = useCallback(() => {
-        setShowResponses(false);
-    }, [])
-
-    useEffect(() => {
-        if (onResetShowResponses) {
-            onResetShowResponses(resetShowResponses);
-        }
-    }, [onResetShowResponses, resetShowResponses]);
+    }
 
     return (
-
-        
-            <div >
-                <div className="questionContainer">
-                <h2 className="questionName">{questionName}</h2>
-                </div>
-                {choices.map((choice) => (
-                    <div className="choice-cointainer" key={choice._id}>
-                        <button className="choice-button" onClick={() => handleChoiceClick(choice._id)}>
-                            {choice.name}
-                        </button>
-                        {showResponses && (
-                            <p className="choice-response">Responses: {choice.responses}</p>
-                        )}
-                    </div>
-                ))}
+        <div >
+            <div className="questionContainer">
+                <h2 className="questionName">{question.name}</h2>
             </div>
-            );
+            {question.choices.map((choice) => (
+                <div className="choice-cointainer" key={choice._id}>
+                    <button className="choice-button" onClick={() => handleChoiceClick(choice._id)}>
+                        {choice.name}
+                    </button>
+                    {showResponses && (
+                        <p className="choice-response">Responses: {choice.responses}</p>
+                    )}
+                </div>
+            ))}
+        </div>
+    );
 };
 
-            export default QuestionDisplay;
+export default QuestionDisplay;

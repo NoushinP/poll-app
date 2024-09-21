@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_QUESTION = gql`
-query Choices {
+query Question {
   questions {
     _id
     name
