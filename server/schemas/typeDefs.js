@@ -16,6 +16,9 @@ const typeDefs = `
     questions: [Question]
 
   }
+  type Mutation {
+    updateResponses(_id: String!): Choice
+  }
 `;
 
 module.exports = typeDefs;
